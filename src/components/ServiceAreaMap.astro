@@ -1,0 +1,135 @@
+---
+interface Props {
+  center?: { lat: number; lng: number };
+}
+
+const { center = { lat: 40.7128, lng: -74.0060 } } = Astro.props; // NYC center as tri-state focal point
+---
+
+<div class="map-container">
+  <div class="map-overlay">
+    <h3>Service Coverage Area</h3>
+    <p>NY, NJ, CT Tri-State Area</p>
+  </div>
+  <div id="map"></div>
+</div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<script>
+  import L from 'leaflet';
+
+  // Create map instance
+  const map = L.map('map').setView([40.7128, -74.0060], 9);
+
+  // Add dark theme tile layer
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  // Add tri-state coverage area (approximate)
+  const triStateArea = L.circle([40.7128, -74.0060], {
+    color: 'rgb(0, 102, 255)',
+    fillColor: 'rgb(51, 153, 255)',
+    fillOpacity: 0.2,
+    radius: 80000 // Larger radius to cover tri-state area
+  }).addTo(map);
+
+  // Major cities in tri-state area
+  const cities = [
+    { name: "New York City, NY", coords: [40.7128, -74.0060] },
+    { name: "Newark, NJ", coords: [40.7357, -74.1724] },
+    { name: "Jersey City, NJ", coords: [40.7282, -74.0776] },
+    { name: "Stamford, CT", coords: [41.0534, -73.5387] },
+    { name: "White Plains, NY", coords: [41.0340, -73.7629] },
+    { name: "New Haven, CT", coords: [41.3083, -72.9279] },
+    { name: "Yonkers, NY", coords: [40.9312, -73.8987] },
+    { name: "Bridgeport, CT", coords: [41.1792, -73.1894] }
+  ];
+
+  // Custom icon for markers
+  const customIcon = L.divIcon({
+    className: 'custom-marker',
+    html: '<div class="marker-pin"></div>',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30]
+  });
+
+  // Add markers for each city
+  cities.forEach(city => {
+    L.marker(city.coords, { icon: customIcon })
+      .bindPopup(`<b>${city.name}</b><br>Service Area`)
+      .addTo(map);
+  });
+</script>
+
+<style>
+  .map-container {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin: 2rem 0;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .map-overlay {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(19, 21, 26, 0.9);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+  }
+
+  .map-overlay h3 {
+    color: rgb(var(--accent-light));
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+  }
+
+  .map-overlay p {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  #map {
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+  }
+
+  :global(.custom-marker) {
+    background: none;
+    border: none;
+  }
+
+  :global(.marker-pin) {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgb(var(--accent));
+    border: 2px solid white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  :global(.leaflet-popup-content-wrapper) {
+    background: rgba(19, 21, 26, 0.9);
+    color: white;
+    border-radius: 0.5rem;
+    backdrop-filter: blur(10px);
+  }
+
+  :global(.leaflet-popup-tip) {
+    background: rgba(19, 21, 26, 0.9);
+  }
+
+  :global(.leaflet-container a) {
+    color: rgb(var(--accent-light));
+  }
+</style>

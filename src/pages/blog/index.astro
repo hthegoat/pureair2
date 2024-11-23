@@ -1,0 +1,83 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+---
+
+<Layout title="Blog - PureAir Solutions">
+  <main>
+    <div class="blog-hero">
+      <h1>Blog <span class="text-gradient">Coming Soon</span></h1>
+      <p>Stay tuned for expert advice and information about indoor air quality and mold remediation</p>
+    </div>
+
+    <div class="coming-soon">
+      <p>We're working on bringing you valuable content about indoor air quality, mold prevention, and remediation best practices.</p>
+      <a href="/contact" class="cta-button">Contact Us</a>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: auto;
+    padding: 1rem;
+    width: 1200px;
+    max-width: calc(100% - 2rem);
+    color: white;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+
+  .blog-hero {
+    text-align: center;
+    padding: 4rem 0;
+    background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .text-gradient {
+    background-image: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+
+  .coming-soon {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: rgb(var(--accent));
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 2rem;
+    transition: all 0.3s ease;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2.5rem;
+    }
+  }
+</style>

@@ -1,0 +1,84 @@
+---
+interface Props {
+  town: string;
+  description: string;
+  services: string[];
+  slug: string;
+}
+
+const { town, description, services, slug } = Astro.props;
+---
+
+<div class="service-area-card">
+  <div class="content">
+    <h3>{town}, NJ</h3>
+    <p>{description}</p>
+    <ul class="services-list">
+      {services.map(service => (
+        <li>{service}</li>
+      ))}
+    </ul>
+    <a href={`/areas-served/${slug}`} class="learn-more">View Service Area →</a>
+  </div>
+</div>
+
+<style>
+  .service-area-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .service-area-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .content {
+    padding: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    color: rgb(var(--accent-light));
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: #e5e7eb;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .services-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+
+  .services-list li {
+    padding-left: 1.5rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+    color: #9ca3af;
+  }
+
+  .services-list li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: rgb(var(--accent));
+  }
+
+  .learn-more {
+    display: inline-block;
+    color: rgb(var(--accent-light));
+    text-decoration: none;
+    margin-top: 1rem;
+    transition: color 0.3s ease;
+  }
+
+  .learn-more:hover {
+    color: rgb(var(--accent));
+  }
+</style>

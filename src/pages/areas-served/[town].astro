@@ -1,0 +1,209 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export function getStaticPaths() {
+  return [
+    {
+      params: { town: 'paramus' },
+      props: {
+        town: 'Paramus',
+        description: 'Comprehensive mold inspection and air quality services for Paramus residents and businesses.',
+        services: ['Mold Assessment', 'Air Quality Testing', 'Remediation Services'],
+        image: '/areas/paramus.jpg',
+        highlights: [
+          'Rapid response times throughout Paramus',
+          'Experienced with local building codes and regulations',
+          'Serving both residential and commercial properties',
+          'Emergency services available 24/7'
+        ]
+      }
+    },
+    {
+      params: { town: 'hackensack' },
+      props: {
+        town: 'Hackensack',
+        description: 'Expert indoor air quality solutions serving the Hackensack community.',
+        services: ['Commercial Inspections', 'Residential Testing', 'Emergency Services'],
+        image: '/areas/hackensack.jpg',
+        highlights: [
+          'Comprehensive services for Hackensack properties',
+          'Familiar with local environmental concerns',
+          'Expert solutions for residential and commercial spaces',
+          'Same-day service available'
+        ]
+      }
+    },
+    // Add more towns as needed
+  ];
+}
+
+const { town, description, services, image, highlights } = Astro.props;
+---
+
+<Layout title={`${town}, NJ Services - PureAir Solutions`}>
+  <main>
+    <div class="town-hero" style={`background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${image})`}>
+      <h1>Services in <span class="text-gradient">{town}</span>, NJ</h1>
+      <p>{description}</p>
+    </div>
+
+    <section class="services-section">
+      <h2>Our Services in {town}</h2>
+      <div class="services-grid">
+        {services.map((service) => (
+          <div class="service-card">
+            <h3>{service}</h3>
+            <p>Professional {service.toLowerCase()} services tailored to {town} properties.</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="highlights-section">
+      <h2>Why Choose Us in {town}</h2>
+      <div class="highlights-grid">
+        {highlights.map((highlight) => (
+          <div class="highlight-card">
+            <span class="checkmark">✓</span>
+            <p>{highlight}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <h2>Ready to Schedule Service in {town}?</h2>
+      <p>Contact us today for expert air quality and mold remediation services</p>
+      <a href="/contact" class="cta-button">Schedule Consultation</a>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: auto;
+    padding: 1rem;
+    width: 1200px;
+    max-width: calc(100% - 2rem);
+    color: white;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+
+  .town-hero {
+    text-align: center;
+    padding: 6rem 0;
+    background-size: cover;
+    background-position: center;
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .text-gradient {
+    background-image: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+
+  .services-section,
+  .highlights-section {
+    margin: 4rem 0;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .service-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 1rem;
+    transition: transform 0.3s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .service-card h3 {
+    color: rgb(var(--accent-light));
+    margin-bottom: 1rem;
+  }
+
+  .highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .highlight-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .checkmark {
+    color: rgb(var(--accent-light));
+    font-size: 1.2rem;
+  }
+
+  .cta-section {
+    text-align: center;
+    background: linear-gradient(45deg, rgb(var(--accent-dark)), rgb(var(--accent)));
+    padding: 4rem 2rem;
+    border-radius: 1rem;
+    margin-top: 4rem;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: white;
+    color: rgb(var(--accent));
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 2rem;
+    transition: all 0.3s ease;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    .town-hero {
+      padding: 4rem 1rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    .services-grid,
+    .highlights-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

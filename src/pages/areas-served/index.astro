@@ -1,0 +1,165 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ServiceAreaCard from '../../components/ServiceAreaCard.astro';
+import ServiceAreaMap from '../../components/ServiceAreaMap.astro';
+
+const serviceAreas = [
+  {
+    town: "New York City",
+    description: "Comprehensive mold inspection and air quality services throughout the five boroughs.",
+    services: ["Mold Assessment", "Air Quality Testing", "Remediation Services"],
+    slug: "new-york-city"
+  },
+  {
+    town: "Northern New Jersey",
+    description: "Expert indoor air quality solutions serving Bergen, Essex, Hudson, and surrounding counties.",
+    services: ["Commercial Inspections", "Residential Testing", "Emergency Services"],
+    slug: "northern-nj"
+  },
+  {
+    town: "Connecticut",
+    description: "Professional mold and air quality services in Fairfield, New Haven, and surrounding areas.",
+    services: ["Mold Detection", "Air Purification", "Prevention Services"],
+    slug: "connecticut"
+  },
+  {
+    town: "Long Island",
+    description: "Serving Nassau and Suffolk counties with comprehensive indoor environmental solutions.",
+    services: ["Indoor Air Testing", "Mold Remediation", "Quality Assessments"],
+    slug: "long-island"
+  },
+  {
+    town: "Westchester",
+    description: "Professional air quality and mold services throughout Westchester County.",
+    services: ["Air Quality Analysis", "Mold Inspection", "Emergency Response"],
+    slug: "westchester"
+  },
+  {
+    town: "Hudson Valley",
+    description: "Expert mold and air quality solutions for the Hudson Valley region.",
+    services: ["Residential Services", "Commercial Testing", "Remediation"],
+    slug: "hudson-valley"
+  }
+];
+---
+
+<Layout title="Areas Served - PureAir Solutions">
+  <main>
+    <div class="areas-hero">
+      <h1>Areas <span class="text-gradient">Served</span></h1>
+      <p>Serving the entire Tri-State Area (NY, NJ, CT) with professional air quality and mold remediation services</p>
+    </div>
+
+    <ServiceAreaMap />
+
+    <section class="service-areas">
+      <div class="areas-grid">
+        {serviceAreas.map(area => (
+          <ServiceAreaCard {...area} />
+        ))}
+      </div>
+    </section>
+
+    <section class="coverage-info">
+      <h2>Serving the Entire Tri-State Area</h2>
+      <p>Our services extend throughout New York, New Jersey, and Connecticut. Contact us to schedule service in your area.</p>
+      
+      <div class="contact-banner">
+        <h3>Need Service in Your Area?</h3>
+        <p>Contact us today to schedule an inspection or consultation</p>
+        <a href="/contact" class="cta-button">Get in Touch</a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: auto;
+    padding: 1rem;
+    width: 1200px;
+    max-width: calc(100% - 2rem);
+    color: white;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+
+  .areas-hero {
+    text-align: center;
+    padding: 4rem 0;
+    background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .text-gradient {
+    background-image: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+
+  .areas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .coverage-info {
+    text-align: center;
+    margin: 4rem 0;
+  }
+
+  .coverage-info h2 {
+    color: rgb(var(--accent-light));
+    margin-bottom: 1rem;
+  }
+
+  .contact-banner {
+    background: linear-gradient(45deg, rgb(var(--accent-dark)), rgb(var(--accent)));
+    padding: 3rem 2rem;
+    border-radius: 1rem;
+    margin-top: 3rem;
+  }
+
+  .contact-banner h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: white;
+    color: rgb(var(--accent));
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    .areas-grid {
+      grid-template-columns: 1fr;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+  }
+</style>
