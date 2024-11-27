@@ -9,7 +9,7 @@ const { center = { lat: 40.7128, lng: -74.0060 } } = Astro.props; // NYC center 
 <div class="map-container">
   <div class="map-overlay">
     <h3>Service Coverage Area</h3>
-    <p>NY, NJ, CT Tri-State Area</p>
+    <p>Tri-State Area</p>
   </div>
   <div id="map"></div>
 </div>
@@ -42,11 +42,8 @@ const { center = { lat: 40.7128, lng: -74.0060 } } = Astro.props; // NYC center 
     { name: "New York City, NY", coords: [40.7128, -74.0060] },
     { name: "Newark, NJ", coords: [40.7357, -74.1724] },
     { name: "Jersey City, NJ", coords: [40.7282, -74.0776] },
-    { name: "Stamford, CT", coords: [41.0534, -73.5387] },
     { name: "White Plains, NY", coords: [41.0340, -73.7629] },
-    { name: "New Haven, CT", coords: [41.3083, -72.9279] },
     { name: "Yonkers, NY", coords: [40.9312, -73.8987] },
-    { name: "Bridgeport, CT", coords: [41.1792, -73.1894] }
   ];
 
   // Custom icon for markers

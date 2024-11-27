@@ -11,7 +11,7 @@ const { town, description, services, slug } = Astro.props;
 
 <div class="service-area-card">
   <div class="content">
-    <h3>{town}, NJ</h3>
+    <h3>{town}</h3>
     <p>{description}</p>
     <ul class="services-list">
       {services.map(service => (
